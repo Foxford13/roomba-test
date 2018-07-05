@@ -76,7 +76,9 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 
 	let tilesCleaned = 0;
 	const roomLengthArr = (yLengthRoom * xLengthRoom ) - 1;
-
+	/*
+	* adds a position where roomba starts as a possible cleaning spot
+	*/
 	displacementDir.unshift(0);
 
 	/*
@@ -84,6 +86,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 	*/
 
 	displacementDir.forEach((element) => {
+
 		/*
 		* Filters out not allowe movemend direction i.e. walls
 		*/
@@ -96,7 +99,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 		positionRoomba = positionRoomba + element;
 
 		/*
-		* Checks position of roomba ahgainst the dir patches array and removes cleaned coordinates from it
+		* Checks position of roomba ahgainst the dirt patches array and removes cleaned coordinates from it
 		*/
 
 		if (dirtArray.includes(positionRoomba)) {
