@@ -8,6 +8,6 @@ To run this code you will need to:
 - Download or clone the repo from https://github.com/Foxford13/roomba-test
 - Run 'npm install'
 - Run 'node app.js'
-- The results of the input will appear in terminal as console logs in a format
-								Coordinates of roomba: x= 1, y= 3
+- The results of the input will appear in terminal as console logs in a format: </ br>
+								Coordinates of roomba: x= 1, y= 3  </ br>
 								Tiles cleaned: 1
