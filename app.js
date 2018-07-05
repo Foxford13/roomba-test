@@ -14,25 +14,20 @@ app.listen(3000, async ()=>{
 */
 
 fs.watchFile('./input.txt', function() {
-
-	retrievetxtData ();
-
+	retrieveTxtData ();
 });
 
 /*
 *   a nodejs filesystem method that invokes a function that calculates the input.txt file on a callback
 */
 
-function retrievetxtData () {
+function retrieveTxtData () {
 	fs.readFile('input.txt', function (err, data) {
-
 		if (err) {
 			return console.error(err);
 		}
-
 		calculateTheResultOfTheInputFile(data);
 	});
-
 }
 
 
@@ -69,7 +64,7 @@ function calculateTheResultOfTheInputFile (data) {
 	const dirtArrayIndex = convertCoordinatesToArrayIndex(dirtCoordinates, yLengthRoom);
 	const roombaArrayPathIndex = convertDirectionToNumbers(roombaDirections, yLengthRoom);
 
-	performCleaning(roomArrayLength, roombaIndex, dirtArrayIndex, roombaArrayPathIndex, yLengthRoom);
+	performCleaning(roombaIndex, dirtArrayIndex, roombaArrayPathIndex, yLengthRoom, xLengthRoom);
 
 }
 
@@ -77,45 +72,38 @@ function calculateTheResultOfTheInputFile (data) {
 *  function that calculates the path of the roomba and the results of cleaning
 */
 
-function performCleaning (dimension, position, target, displacementDir, lengthRoom) {
-
-	dimension = +dimension;
-	position = +position;
+function performCleaning (positionRoomba, target, displacementDir, yLengthRoom, xLengthRoom) {
 
 	let tilesCleaned = 0;
+	const roomLengthArr = (yLengthRoom * xLengthRoom ) - 1;
 
-	var path = [position];
 
-	const sizeRoom = (lengthRoom * lengthRoom ) - 1;
+	positionRoomba = +positionRoomba;
+	displacementDir.unshift(0);
+
 	displacementDir.forEach((element) => {
 
-		const bordersCondition = (position + element) > sizeRoom || position + element < 0 || position % lengthRoom === 0 &&  element === -1
-		|| (position + 1) % lengthRoom === 0 && element === 1;
+		const bordersCondition = (positionRoomba + element) > roomLengthArr || positionRoomba + element < 0 || positionRoomba % yLengthRoom === 0 &&  element === -1
+		|| (positionRoomba + 1) % yLengthRoom === 0 && element === 1;
 
 		if (bordersCondition)	return;
 
-		position = position + element;
+		positionRoomba = positionRoomba + element;
 
-		path.push(position);
+		if (target.includes(positionRoomba)) {
 
-		if (target.includes(position)) {
-			console.log('yey');
-
-
-			const index = target.indexOf(position);
+			const index = target.indexOf(positionRoomba);
 			if (index !== -1) target.splice(index, 1);
 			tilesCleaned ++
 		}
 
 	});
-	console.log(path);
 
-	const xCord = position % lengthRoom;
-	const yCord = (position - xCord)/lengthRoom;
+	const xCord = positionRoomba % yLengthRoom;
+	const yCord = (positionRoomba - xCord)/yLengthRoom;
 
 	console.log("Final coordinates of roomba: x= " + xCord + ", y= " + yCord );
 	console.log("Tiles cleaned: " + tilesCleaned);
-
 }
 
 
@@ -203,4 +191,4 @@ function calcRoomArrLenght  (room) {
 	return obj;
 }
 
-retrievetxtData ();
+retrieveTxtData ();
