@@ -72,15 +72,21 @@ function calculateTheResultOfTheInputFile (data) {
 *  function that calculates the path of the roomba and the results of cleaning
 */
 
-function performCleaning (positionRoomba, target, displacementDir, yLengthRoom, xLengthRoom) {
+function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoom, xLengthRoom) {
 
 	let tilesCleaned = 0;
 	const roomLengthArr = (yLengthRoom * xLengthRoom ) - 1;
 
-	positionRoomba = +positionRoomba;
 	displacementDir.unshift(0);
 
+	/*
+	* Puts roomba on the move and calculates its pattern
+	*/
+
 	displacementDir.forEach((element) => {
+		/*
+		* Filters out not allowe movemend direction i.e. walls
+		*/
 
 		const bordersCondition = (positionRoomba + element) > roomLengthArr || positionRoomba + element < 0 || positionRoomba % yLengthRoom === 0 &&  element === -1
 		|| (positionRoomba + 1) % yLengthRoom === 0 && element === 1;
@@ -89,10 +95,14 @@ function performCleaning (positionRoomba, target, displacementDir, yLengthRoom, 
 
 		positionRoomba = positionRoomba + element;
 
-		if (target.includes(positionRoomba)) {
+		/*
+		* Checks position of roomba ahgainst the dir patches array and removes cleaned coordinates from it
+		*/
 
-			const index = target.indexOf(positionRoomba);
-			if (index !== -1) target.splice(index, 1);
+		if (dirtArray.includes(positionRoomba)) {
+
+			const index = dirtArray.indexOf(positionRoomba);
+			if (index !== -1) dirtArray.splice(index, 1);
 			tilesCleaned ++
 		}
 
