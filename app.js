@@ -30,7 +30,6 @@ function retrieveTxtData () {
 	});
 }
 
-
 /*
 *   This function collects and restructures the data so it can be used in a final fiunction that calculates a result of the cleaning and a position of roomba
 */
@@ -117,7 +116,6 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 	console.log("Final coordinates of roomba: x= " + xCord + ", y= " + yCord );
 	console.log("Tiles cleaned: " + tilesCleaned);
 }
-
 
 /*
 *    UTILITY FUNCTIONS that transform the input.txt data to numbers
