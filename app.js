@@ -77,7 +77,6 @@ function performCleaning (positionRoomba, target, displacementDir, yLengthRoom, 
 	let tilesCleaned = 0;
 	const roomLengthArr = (yLengthRoom * xLengthRoom ) - 1;
 
-
 	positionRoomba = +positionRoomba;
 	displacementDir.unshift(0);
 
