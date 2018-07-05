@@ -9,25 +9,36 @@ app.listen(3000, async ()=>{
 	console.log('App is listening on port 3000');
 });
 
+/*
+*  File system method that watches input.txt for changes
+*/
+
+fs.watchFile('./input.txt', function() {
+
+	retrievetxtData ();
+
+});
 
 /*
 *   a nodejs filesystem method that invokes a function that calculates the input.txt file on a callback
 */
 
-fs.readFile('input.txt', function (err, data) {
+function retrievetxtData () {
+	fs.readFile('input.txt', function (err, data) {
 
-	if (err) {
-		return console.error(err);
-	}
+		if (err) {
+			return console.error(err);
+		}
 
-	calculateTheResultOfTheInputFile(data);
-});
+		calculateTheResultOfTheInputFile(data);
+	});
+
+}
 
 
 /*
 *   This function collects and restructures the data so it can be used in a final fiunction that calculates a result of the cleaning and a position of roomba
 */
-
 
 function calculateTheResultOfTheInputFile (data) {
 
@@ -70,32 +81,39 @@ function performCleaning (dimension, position, target, displacementDir, lengthRo
 
 	dimension = +dimension;
 	position = +position;
+
 	let tilesCleaned = 0;
 
-	var path = [];
+	var path = [position];
 
+	const sizeRoom = (lengthRoom * lengthRoom ) - 1;
 	displacementDir.forEach((element) => {
 
-		const bordersCondition = position + element > 24 || position + element < 0 || position % lengthRoom === 0 &&  element === -1
-															|| (position + 1) % lengthRoom === 0 && element === 1;
+		const bordersCondition = (position + element) > sizeRoom || position + element < 0 || position % lengthRoom === 0 &&  element === -1
+		|| (position + 1) % lengthRoom === 0 && element === 1;
 
 		if (bordersCondition)	return;
 
 		position = position + element;
+
 		path.push(position);
 
 		if (target.includes(position)) {
+			console.log('yey');
+
+
 			const index = target.indexOf(position);
 			if (index !== -1) target.splice(index, 1);
 			tilesCleaned ++
 		}
 
 	});
+	console.log(path);
 
 	const xCord = position % lengthRoom;
 	const yCord = (position - xCord)/lengthRoom;
 
-	console.log("Coordinates of roomba: x= " + xCord + ", y= " + yCord );
+	console.log("Final coordinates of roomba: x= " + xCord + ", y= " + yCord );
 	console.log("Tiles cleaned: " + tilesCleaned);
 
 }
@@ -184,3 +202,5 @@ function calcRoomArrLenght  (room) {
 
 	return obj;
 }
+
+retrievetxtData ();

@@ -2,12 +2,12 @@
 -
 #### Installation
 
-To run this code you will need to:
+To run this application you will need to:
 
-- Toy have to have npm and Node.js installed
+- To have npm and Node.js installed
 - Download or clone the repo from https://github.com/Foxford13/roomba-test
 - Run 'npm install'
 - Run 'node app.js'
-- The results of the input will appear in terminal as console logs in a format: </ br>
-								Coordinates of roomba: x= 1, y= 3  </ br>
-								Tiles cleaned: 1
+- the app is watching the file for changes so there is  no need to restart the app after changing the contents of input.txt file
+- The results of the input will appear in terminal as console logs in a format: "Final oordinates of roomba: x= 1, y= 3 Tiles cleaned: 1
+
