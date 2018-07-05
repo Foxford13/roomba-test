@@ -31,16 +31,16 @@ fs.readFile('input.txt', function (err, data) {
 
 function calculateTheResultOfTheInputFile (data) {
 
-	const arrayOfLines = cleanTextInputData (data) ;
+	const arrInputLines = cleanTextInputData(data);
 
 	/*
 	*   input.txt file split according to their line number
 	*/
 
-	const roomDimension = arrayOfLines[0];
-	const roombaPosition = [arrayOfLines[1]];
-	const dirtCoordinates = arrayOfLines.slice(2, -1);
-	const roombaDirections = arrayOfLines[arrayOfLines.length - 1];
+	const roomDimension = arrInputLines[0];
+	const roombaPosition = [arrInputLines[1]];
+	const dirtCoordinates = arrInputLines.slice(2, -1);
+	const roombaDirections = arrInputLines[arrInputLines.length - 1];
 
 	/*
 	*   Constants holding values of input.txt as numerical values
@@ -48,13 +48,13 @@ function calculateTheResultOfTheInputFile (data) {
 
 	const xLengthRoom = calcRoomArrLenght(roomDimension).x;
 	const yLengthRoom = calcRoomArrLenght(roomDimension).y;
-	const roomArrayLength = xLengthRoom * yLengthRoom;
+	const roomArrayLength = +(xLengthRoom * yLengthRoom);
 
 	/*
 	*  Arrays of values representing coordinates of elements as index number
 	*/
 
-	const roombaIndex = convertCoordinatesToArrayIndex(roombaPosition, yLengthRoom, yLengthRoom);
+	const roombaIndex = +(convertCoordinatesToArrayIndex(roombaPosition, yLengthRoom, yLengthRoom));
 	const dirtArrayIndex = convertCoordinatesToArrayIndex(dirtCoordinates, yLengthRoom);
 	const roombaArrayPathIndex = convertDirectionToNumbers(roombaDirections, yLengthRoom);
 
