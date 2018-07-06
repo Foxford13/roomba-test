@@ -51,8 +51,8 @@ function calculateTheResultOfTheInputFile (data) {
 	*   Constants holding values of input.txt as numerical values
 	*/
 
-	const xLengthRoom = calcRoomArrLenght(roomDimension).x;
-	const yLengthRoom = calcRoomArrLenght(roomDimension).y;
+	const xLengthRoom = calcRoomArrLength(roomDimension).x;
+	const yLengthRoom = calcRoomArrLength(roomDimension).y;
 	const roomArrayLength = +(xLengthRoom * yLengthRoom);
 
 	/*
@@ -64,11 +64,10 @@ function calculateTheResultOfTheInputFile (data) {
 	const roombaArrayPathIndex = convertDirectionToNumbers(roombaDirections, yLengthRoom);
 
 	performCleaning(roombaIndex, dirtArrayIndex, roombaArrayPathIndex, yLengthRoom, xLengthRoom);
-
 }
 
 /*
-*  function that calculates the path of the roomba and the results of cleaning
+*  function that calculates the path of the roomba and the results of cleaning aka. Logic
 */
 
 function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoom, xLengthRoom) {
@@ -87,7 +86,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 	displacementDir.forEach((element) => {
 
 		/*
-		* Filters out not allowe movemend direction i.e. walls
+		* Filters out not allowed dispalcement direction i.e. walls
 		*/
 
 		const bordersCondition = (positionRoomba + element) > roomLengthArr || positionRoomba + element < 0 || positionRoomba % yLengthRoom === 0 &&  element === -1
@@ -187,7 +186,7 @@ function convertDirectionToNumbers (arr, lengthRoomY) {
 *   function that returns an object with numerical values for the dimensions of the room
 */
 
-function calcRoomArrLenght  (room) {
+function calcRoomArrLength  (room) {
 
 	room = 	room.split(' ');
 	const xLength =  +room[0];
