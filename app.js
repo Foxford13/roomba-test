@@ -39,7 +39,7 @@ function calculateTheResultOfTheInputFile (data) {
 	const arrInputLines = cleanTextInputData(data);
 
 	/*
-	*   input.txt file split according to their line number
+	*   input.txt file split into lines
 	*/
 
 	const roomDimension = arrInputLines[0];
@@ -86,7 +86,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 	displacementDir.forEach((element) => {
 
 		/*
-		* Filters out not allowed dispalcement direction i.e. walls
+		* Filters out not allowed displcement direction i.e. walls
 		*/
 
 		const bordersCondition = (positionRoomba + element) > roomLengthArr || positionRoomba + element < 0 || positionRoomba % yLengthRoom === 0 &&  element === -1
@@ -97,7 +97,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 		positionRoomba = positionRoomba + element;
 
 		/*
-		* Checks position of roomba ahgainst the dirt patches array and removes cleaned coordinates from it
+		* Checks position of roomba against the dirt patches array and removes cleaned coordinates from it
 		*/
 
 		if (dirtArray.includes(positionRoomba)) {
@@ -105,7 +105,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 			const index = dirtArray.indexOf(positionRoomba);
 			if (index !== -1) dirtArray.splice(index, 1);
 			tilesCleaned ++
-		}
+		};
 
 	});
 
@@ -117,7 +117,7 @@ function performCleaning (positionRoomba, dirtArray, displacementDir, yLengthRoo
 }
 
 /*
-*    UTILITY FUNCTIONS that transform the input.txt data to numbers
+*    UTILITY FUNCTIONS that transform the input.txt data to integers
 *
 *
 *   Cleans data retrieved from input.txt, truns it into array representing lines of text, and removes empty strings
@@ -132,7 +132,7 @@ function cleanTextInputData (data) {
 }
 
 /*
-*   Cleans data retrieved from input.txt, truns it into array representing lines of text, and removes empty strings
+*   Converts the X Y coordinates into array of values
 */
 
 function convertCoordinatesToArrayIndex (coordinatesArray, lengthRoomY) {
@@ -147,7 +147,7 @@ function convertCoordinatesToArrayIndex (coordinatesArray, lengthRoomY) {
 
 		result.push(indexArray);
 
-	})
+	});
 
 	return  result;
 }
@@ -177,7 +177,7 @@ function convertDirectionToNumbers (arr, lengthRoomY) {
 			default:
 			return;
 		}
-	})
+	});
 
 	return arrDirections;
 }
@@ -195,7 +195,7 @@ function calcRoomArrLength  (room) {
 	const obj = {
 		x: xLength,
 		y: yLength
-	}
+	};
 
 	return obj;
 }
